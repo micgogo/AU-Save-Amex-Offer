@@ -1,5 +1,5 @@
 # AU-Save-Amex-Offer
-Python Script to auto save amex offer
+Python Script to auto save amex offer for Australia only
 
 Modifier this part in the code to the location of your Firefox x64 WebDriver
 
