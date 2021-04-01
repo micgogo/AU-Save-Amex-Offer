@@ -16,5 +16,4 @@ You can put as many as you want
 <h3>Prerequisite:</h3>
 Install Python 3
 Install Selenium
-Go to this [link](https://github.com/mozilla/geckodriver/releases) to download firefox WebDriver
-
+Go to this link https://github.com/mozilla/geckodriver/releases to download firefox WebDriver
