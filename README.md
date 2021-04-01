@@ -13,7 +13,7 @@ username2:password2
 username3:password3
 You can put as many as you want
 
-<h3>Prerequisite:</h3>
+Prerequisite:
 Install Python 3
 Install Selenium
 Go to this link https://github.com/mozilla/geckodriver/releases to download firefox WebDriver
