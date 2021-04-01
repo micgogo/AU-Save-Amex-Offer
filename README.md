@@ -19,7 +19,7 @@ username3:password3
 
 You can put as many as you want
 
-<h6>Prerequisite:</h6>
+<h3>Prerequisite:</h3>
 Install Python 3
 
 Install Selenium
