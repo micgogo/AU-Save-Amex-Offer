@@ -21,5 +21,7 @@ You can put as many as you want
 
 <h6>Prerequisite:</h6>
 Install Python 3
+
 Install Selenium
+
 Go to this link https://github.com/mozilla/geckodriver/releases to download firefox WebDriver
