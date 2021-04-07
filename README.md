@@ -30,11 +30,13 @@ filelocation = "C:/WebDriver/amexaccounts.txt"
 
 ```
 
-In the login text file format is
+Sample login text file format
 
+```
 username1:password1
 username2:password2
 username3:password3
+```
 
 You can put as many as you want
 
