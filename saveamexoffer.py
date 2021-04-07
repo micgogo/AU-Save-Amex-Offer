@@ -13,7 +13,7 @@ position = 0
 switch = 0
 TotalOffer = 0
 #Text file contain all amex login details
-filelocation = "C:/WebDriver/amexaccounts.txt"
+filelocation = "C:/WebDriver/test.txt"
 #Location to the firefox web driver
 firefoxdriver = "C:/WebDriver/x64/geckodriver.exe"
 
@@ -144,10 +144,8 @@ def saveamexoffer(loginname, loginpassword):
                 if int(TotalOffer) == 0:
                     break
 
-    #print("All Offer Saved")
+    print("All Offer Saved")
     driver.close()
-
-
 
 
 logindetails = {}
