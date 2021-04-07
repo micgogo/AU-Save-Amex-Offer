@@ -1,4 +1,11 @@
-# A Python Script to Auto Save Amex Offer
+# A Python Script to Auto Save Amex Offer (AU)
+
+## Description
+
+saveamexoffer.py - For Auto Save Offers
+
+listamexoffer.py - Export Saved Offer to Excel Sheet
+
 
 ## Installation
 
@@ -34,3 +41,4 @@ username1:password1
 username2:password2
 username3:password3
 ```
+
