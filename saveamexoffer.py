@@ -124,13 +124,9 @@ def saveamexoffer(loginname, loginpassword):
 
     #Save each offer to card
     while switch == 0:
-        exists = False
-        while (exists == False):
-            nextCard(driver)
-            exists = is_element_exist(driver)
-            if (switch == 1):
-                break
-        
+        nextCard(driver)
+        exists = is_element_exist(driver)
+
         if (exists == True):
             try:
                 positionelement = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//a/span[contains(text(),'Amex Offers')]")))
