@@ -6,11 +6,9 @@
 
 2. Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Selenium.
 
-Install Selenium 
-
-```bash
-pip install selenium
-```
+  ```bash
+  pip install selenium
+  ```
 
 3. 
 
