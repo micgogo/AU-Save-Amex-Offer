@@ -19,7 +19,7 @@ firefoxdriver = "C:/WebDriver/x64/geckodriver.exe"
 
 def is_element_exist(driver):
     try:
-        WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, "//a/span[contains(text(),'Amex Offers')]")))
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//a/span[contains(text(),'Amex Offers')]")))
     except TimeoutException:
         return False
     return True
