@@ -135,7 +135,9 @@ def listamexoffer(loginname, loginpassword):
     while switch == 0:
         nextCard(driver)
         try:
-            positionelement = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//a[@data-view-name='ENROLLED']")))
+            positionelement = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, "//a[@data-view-name='ENROLLED']")))
+        except TimeoutException:
+            nextCard(driver)
         finally:
             movetoposition(driver, positionelement)
             time.sleep(5)
