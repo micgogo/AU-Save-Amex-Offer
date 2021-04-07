@@ -1,6 +1,6 @@
 # A Python Script to Auto Save Amex Offer
 
-## Installation
+# Installation
 
 1. [Install Python 3](https://www.python.org/downloads/)
 
@@ -10,7 +10,12 @@
   pip install selenium
   ```
 
-3. 
+3. Install xlsxwriter
+
+  ```bash
+  pip install XlsxWriter
+  ```
+
 
 Modify this part in the code to the location of your Firefox x64 WebDriver
 
