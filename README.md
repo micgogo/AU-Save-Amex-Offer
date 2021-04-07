@@ -4,6 +4,8 @@
 
 [Install Python 3](https://www.python.org/downloads/)
 
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Selenium.
+
 Install Selenium 
 
 ```bash
