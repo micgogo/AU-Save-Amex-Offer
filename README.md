@@ -2,8 +2,9 @@
 
 ## Installation
 
-Install Python 3
-Install Selenium
+[Install Python 3](https://www.python.org/downloads/)
+
+Install Selenium (pip install selenium)
 
 Modify this part in the code to the location of your Firefox x64 WebDriver
 
