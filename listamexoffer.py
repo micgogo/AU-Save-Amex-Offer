@@ -8,12 +8,21 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+
 
 position = 0
 switch = 0
 All_Offers = {}
+
+def is_element_exist(driver):
+    try:
+        WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, "//a/span[contains(text(),'Amex Offers')]")))
+    except TimeoutException:
+        return False
+    return True
 
 def nextCard(driver):
     global position
@@ -133,24 +142,29 @@ def listamexoffer(loginname, loginpassword):
 
     #List offer for each card
     while switch == 0:
-        nextCard(driver)
-        try:
-            positionelement = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, "//a[@data-view-name='ENROLLED']")))
-        except TimeoutException:
+        exists = False
+        while (exists == False):
             nextCard(driver)
-        finally:
-            movetoposition(driver, positionelement)
-            time.sleep(5)
-            positionelement.click()
-            time.sleep(5)
-        getoffer(driver)
+            exists = is_element_exist(driver)
+            print (exists)
+            if (switch == 1):
+                break
+        if (exists == True):
+            try:
+                positionelement = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//a[@data-view-name='ENROLLED']")))
+            finally:
+                movetoposition(driver, positionelement)
+                time.sleep(5)
+                positionelement.click()
+                time.sleep(5)
+            getoffer(driver)
     driver.close()
 
         
 
 
 #Text file contain all amex login details
-filelocation = "C:/WebDriver/amexaccounts.txt"
+filelocation = "C:/WebDriver/test.txt"
 logindetails = {}
 f = open(filelocation, "r")
 lines = f.readlines()
