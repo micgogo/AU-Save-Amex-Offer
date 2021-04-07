@@ -1,11 +1,11 @@
 # AU-Save-Amex-Offer
 Python Script to auto save amex offer for Australia only
 
-Modifier this part in the code to the location of your Firefox x64 WebDriver
+Modify this part in the code to the location of your Firefox x64 WebDriver
 
-driver = webdriver.Firefox(executable_path=r"C:/WebDriver/x64/geckodriver.exe")
+firefoxdriver = "C:/WebDriver/x64/geckodriver.exe"
 
-Modifier this part in the code to the location of your account login username:password text file
+Modify this part in the code to the location of your account login username:password text file
 
 filelocation = "C:/WebDriver/amexaccounts.txt"
 
