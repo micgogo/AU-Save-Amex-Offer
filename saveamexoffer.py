@@ -12,6 +12,13 @@ position = 0
 switch = 0
 TotalOffer = 0
 
+def is_element_exist(driver):
+    try:
+        WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.XPATH, "//a/span[contains(text(),'Amex Offers')]")))
+    except TimeoutException:
+        return False
+    return True
+
 def nextCard(driver):
     global position
     global switch
@@ -115,19 +122,24 @@ def saveamexoffer(loginname, loginpassword):
     time.sleep(5)
 
     #Save each offer to card
-    while switch == 0:
-        nextCard(driver)
-        try:
-            positionelement = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//a/span[contains(text(),'Amex Offers')]")))
-            element = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//a/span[contains(text(),'Available')]")))
-        finally:
-            movetoposition(driver, positionelement)
-            offer_number = element.text[element.text.find("(")+1:element.text.find(")")]
-        while ((int(offer_number) != 0) or (int(TotalOffer) != 0)):
-            saveoffer(driver)
-            time.sleep(2)
-            if int(TotalOffer) == 0:
-                break
+    while switch == 0:        
+        exists = False
+        While exists == False:
+            nextCard(driver)
+            exists = is_element_exist(driver)
+        
+        if exists == True:
+            try:
+                positionelement = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//a/span[contains(text(),'Amex Offers')]")))
+                element = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//a/span[contains(text(),'Available')]")))
+            finally:
+                movetoposition(driver, positionelement)
+                offer_number = element.text[element.text.find("(")+1:element.text.find(")")]
+            while ((int(offer_number) != 0) or (int(TotalOffer) != 0)):
+                saveoffer(driver)
+                time.sleep(2)
+                if int(TotalOffer) == 0:
+                    break
 
     print("All Offer Saved")
     driver.close()
