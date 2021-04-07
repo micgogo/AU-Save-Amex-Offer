@@ -2,15 +2,17 @@
 
 ## Installation
 
-[Install Python 3](https://www.python.org/downloads/)
+1. [Install Python 3](https://www.python.org/downloads/)
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Selenium.
+2. Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Selenium.
 
 Install Selenium 
 
 ```bash
 pip install selenium
 ```
+
+3. 
 
 Modify this part in the code to the location of your Firefox x64 WebDriver
 
