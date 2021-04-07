@@ -23,7 +23,7 @@ firefoxdriver = "C:/WebDriver/x64/geckodriver.exe"
 
 def is_element_exist(driver):
     try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//a[@data-view-name='ENROLLED']")))
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//a[@data-view-name='ENROLLED']")))
     except TimeoutException:
         return False
     return True
