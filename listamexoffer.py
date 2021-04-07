@@ -146,7 +146,6 @@ def listamexoffer(loginname, loginpassword):
         while (exists == False):
             nextCard(driver)
             exists = is_element_exist(driver)
-            print (exists)
             if (switch == 1):
                 break
         if (exists == True):
@@ -164,7 +163,7 @@ def listamexoffer(loginname, loginpassword):
 
 
 #Text file contain all amex login details
-filelocation = "C:/WebDriver/test.txt"
+filelocation = "C:/WebDriver/amexaccounts.txt"
 logindetails = {}
 f = open(filelocation, "r")
 lines = f.readlines()
