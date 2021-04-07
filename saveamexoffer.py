@@ -12,6 +12,10 @@ from selenium.webdriver.common.action_chains import ActionChains
 position = 0
 switch = 0
 TotalOffer = 0
+#Text file contain all amex login details
+filelocation = "C:/WebDriver/amexaccounts.txt"
+#Location to the firefox web driver
+firefoxdriver = "C:/WebDriver/x64/geckodriver.exe"
 
 def is_element_exist(driver):
     try:
@@ -92,7 +96,7 @@ def saveamexoffer(loginname, loginpassword):
     global TotalOffer
 
     #Path to the selenium firefox WebDriver executable
-    driver = webdriver.Firefox(executable_path=r"C:/WebDriver/x64/geckodriver.exe")
+    driver = webdriver.Firefox(executable_path=firefoxdriver)
     #Amex AU login page
     driver.get("https://www.americanexpress.com/en-au/account/login?inav=iNavLnkLog")
     
@@ -140,12 +144,12 @@ def saveamexoffer(loginname, loginpassword):
                 if int(TotalOffer) == 0:
                     break
 
-    print("All Offer Saved")
+    #print("All Offer Saved")
     driver.close()
 
 
-#Text file contain all amex login details
-filelocation = "C:/WebDriver/amexaccounts.txt"
+
+
 logindetails = {}
 f = open(filelocation, "r")
 lines = f.readlines()
