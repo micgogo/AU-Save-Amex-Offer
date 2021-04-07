@@ -1,5 +1,9 @@
-# AU-Save-Amex-Offer
-Python Script to auto save amex offer for Australia only
+# A Python Script to Auto Save Amex Offer
+
+## Installation
+
+Install Python 3
+Install Selenium
 
 Modify this part in the code to the location of your Firefox x64 WebDriver
 
@@ -20,8 +24,8 @@ username3:password3
 You can put as many as you want
 
 <h3>Prerequisite:</h3>
-Install Python 3
 
-Install Selenium
+
+
 
 Go to this link https://github.com/mozilla/geckodriver/releases to download firefox WebDriver
