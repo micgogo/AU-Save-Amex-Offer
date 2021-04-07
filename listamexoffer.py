@@ -1,9 +1,6 @@
 import re
 import sys
 import time
-import datetime
-import xlsxwriter
-from datetime import timedelta, date
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -12,10 +9,9 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 
-
 position = 0
 switch = 0
-All_Offers = {}
+TotalOffer = 0
 
 def is_element_exist(driver):
     try:
@@ -34,7 +30,7 @@ def nextCard(driver):
     finally:
         element.click()
     
-    time.sleep(6)
+    time.sleep(5)
 
     #Click View All in card selection if exists
     if (driver.find_elements_by_xpath("//a[@title='View All']")):
@@ -53,7 +49,7 @@ def nextCard(driver):
     else:
         allcards[position].click()
         switch = 1
-    time.sleep(10)
+    time.sleep(5)
 
 def movetoposition(driver, positionelement):
     desired_y = (positionelement.size['height'] / 2) + positionelement.location['y']
@@ -62,52 +58,38 @@ def movetoposition(driver, positionelement):
     driver.execute_script("window.scrollBy(0, arguments[0]);", scroll_y_by)
 
 
-def getoffer(driver):
-    global All_Offers
+def saveoffer(driver):
+    global TotalOffer
 
-    if(driver.find_elements_by_xpath("//a[@class='btn btn-block margin-auto margin-0-tb']")):
-        element = driver.find_element_by_xpath("//a[@class='btn btn-block margin-auto margin-0-tb']")
+    #Find if there are offers to save and count how many offers to save
+    if(driver.find_elements_by_xpath("//button[@title='Save to Card']")):
+        alloffer = driver.find_elements_by_xpath("//button[@title='Save to Card']")
+        TotalOffer = int(len(alloffer))
+
+        #Save the offer
+        element = driver.find_element_by_xpath("//button[@title='Save to Card']")
         movetoposition(driver, element)
+        time.sleep(2)
         element.click()
-        time.sleep(10)
+        time.sleep(3)
 
-    Offer_details = driver.find_elements_by_xpath("//p[@class='heading-3 margin-0-b dls-accent-gray-06']")
-    Offer_Brand = driver.find_elements_by_xpath("//p[@class='body-1 margin-0-b dls-accent-gray-05']")
-    Offer_Card = driver.find_elements_by_xpath("//div[@class='col-sm-12 col-md-3 pad-0-l']")
-    Offer_End = driver.find_elements_by_xpath("//div[@class='offer-expires offer-column margin-auto-l margin-b-md-down col-md-2']")
+        #Scroll the page up
+        positionelement = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//a/span[contains(text(),'Amex Offers')]")))
+        movetoposition(driver, positionelement)
+        time.sleep(5)
 
-    i = 0
-    while (i < len(Offer_details)):
-        CardNo = Offer_Card[i].text.split("Saved to Card -")[1]
-        EndDate = Offer_End[i].text
-        if (EndDate.find("\n")):
-            EndDate = EndDate.replace("EXPIRES\n", "")
-
-        if (EndDate.find("in") != -1):
-            EndDate = EndDate[EndDate.find("in")+2:EndDate.find("days")].strip()
-            today = date.today()
-            ExpireDate = date.today() + datetime.timedelta(days=int(EndDate))
-            if (len(str(ExpireDate.month)) != 2):
-                emonth = "0" + str(ExpireDate.month)
-            else:
-                emonth = str(ExpireDate.month)
-            NewExpireDate = str(ExpireDate.day) + "/" + emonth + "/" + str(ExpireDate.year)
-        else:
-            NewExpireDate = EndDate
-
-        All_Offers.setdefault(CardNo, []).append(Offer_Brand[i].text)
-        All_Offers.setdefault(CardNo, []).append(Offer_details[i].text)
-        All_Offers.setdefault(CardNo, []).append(NewExpireDate)
-        i = i + 1
-
-    
+        #Click on Avaliable to refresh offer
+        element = driver.find_element_by_xpath("//a[@data-view-name='ELIGIBLE']")
+        element.click()
+        time.sleep(5)
+    else:
+        TotalOffer = 0
 
 
-
-def listamexoffer(loginname, loginpassword):
+def saveamexoffer(loginname, loginpassword):
     global position
     global switch
-    global All_Offers
+    global TotalOffer
 
     #Path to the selenium firefox WebDriver executable
     driver = webdriver.Firefox(executable_path=r"C:/WebDriver/x64/geckodriver.exe")
@@ -140,26 +122,26 @@ def listamexoffer(loginname, loginpassword):
 
     time.sleep(5)
 
-    #List offer for each card
+    #Save each offer to card
     while switch == 0:
-        exists = False
-        while (exists == False):
-            nextCard(driver)
-            exists = is_element_exist(driver)
-            if (switch == 1):
-                break
+        nextCard(driver)
+        exists = is_element_exist(driver)
+        
         if (exists == True):
             try:
-                positionelement = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//a[@data-view-name='ENROLLED']")))
+                positionelement = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//a/span[contains(text(),'Amex Offers')]")))
+                element = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//a/span[contains(text(),'Available')]")))
             finally:
                 movetoposition(driver, positionelement)
-                time.sleep(5)
-                positionelement.click()
-                time.sleep(5)
-            getoffer(driver)
-    driver.close()
+                offer_number = element.text[element.text.find("(")+1:element.text.find(")")]
+            while ((int(offer_number) != 0) or (int(TotalOffer) != 0)):
+                saveoffer(driver)
+                time.sleep(2)
+                if int(TotalOffer) == 0:
+                    break
 
-        
+    print("All Offer Saved")
+    driver.close()
 
 
 #Text file contain all amex login details
@@ -176,33 +158,7 @@ f.close()
 
 #Save amex offer to all accounts one by one
 for logins in logindetails:
-    listamexoffer(logins, logindetails[logins])
+    saveamexoffer(logins, logindetails[logins])
     position = 0
     switch = 0
-
-
-# Create a workbook and add a worksheet.
-workbook = xlsxwriter.Workbook('C:/WebDriver/AmexOffer.xlsx')
-worksheet = workbook.add_worksheet()
-
-row = 0
-col = 0
-
-worksheet.write(row, col, "Card Number")
-worksheet.write(row, col + 1, "Offer Brand")
-worksheet.write(row, col + 2, "Offer Details")
-worksheet.write(row, col + 3, "Offer Expire Date")
-row += 1
-for data in All_Offers:
-    i = 0
-    while (i < len(All_Offers[data])):
-        worksheet.write(row, col, str(data))
-        worksheet.write(row, col + 1, All_Offers[data][i])
-        worksheet.write(row, col + 2, All_Offers[data][i+1])
-        worksheet.write(row, col + 3, All_Offers[data][i+2])
-        i = i + 3
-        row += 1
-
-workbook.close()
-
-input('Press Enter to Exit...')
+    TotalOffer = 0
