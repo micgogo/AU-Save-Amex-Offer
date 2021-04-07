@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 
@@ -122,13 +123,15 @@ def saveamexoffer(loginname, loginpassword):
     time.sleep(5)
 
     #Save each offer to card
-    while switch == 0:        
+    while switch == 0:
         exists = False
-        While exists == False:
+        while (exists == False):
             nextCard(driver)
             exists = is_element_exist(driver)
+            if (switch == 1):
+                break
         
-        if exists == True:
+        if (exists == True):
             try:
                 positionelement = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//a/span[contains(text(),'Amex Offers')]")))
                 element = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//a/span[contains(text(),'Available')]")))
