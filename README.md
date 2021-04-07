@@ -3,14 +3,12 @@
 ## Installation
 
 1. [Install Python 3](https://www.python.org/downloads/)
-
-2. Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Selenium.
-
+2. Go to this [link](https://github.com/mozilla/geckodriver/releases) to download firefox WebDriver
+3. Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Selenium.
   ```bash
   pip install selenium
   ```
-
-3. Install xlsxwriter
+4. Install xlsxwriter
 
   ```bash
   pip install XlsxWriter
@@ -37,12 +35,3 @@ username1:password1
 username2:password2
 username3:password3
 ```
-
-You can put as many as you want
-
-<h3>Prerequisite:</h3>
-
-
-
-
-Go to this link https://github.com/mozilla/geckodriver/releases to download firefox WebDriver
