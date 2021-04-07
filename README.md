@@ -4,7 +4,7 @@
 
 saveamexoffer.py - For Auto Save Offers
 
-listamexoffer.py - Export Saved Offer to Excel Sheet
+listamexoffer.py - Export Saved Offers to Excel Sheet
 
 
 ## Installation
