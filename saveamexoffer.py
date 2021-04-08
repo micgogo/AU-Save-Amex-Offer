@@ -53,7 +53,7 @@ def nextCard(driver):
     else:
         allcards[position].click()
         switch = 1
-    time.sleep(5)
+    time.sleep(7)
 
 def movetoposition(driver, positionelement):
     desired_y = (positionelement.size['height'] / 2) + positionelement.location['y']
