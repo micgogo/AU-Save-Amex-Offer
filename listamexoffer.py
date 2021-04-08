@@ -20,6 +20,8 @@ All_Offers = {}
 filelocation = "C:/WebDriver/test.txt"
 #Location to the firefox web driver
 firefoxdriver = "C:/WebDriver/x64/geckodriver.exe"
+#Location of the exported excel file
+amexexcelfile = 'C:/WebDriver/AmexOffer.xlsx'
 
 def is_element_exist(driver):
     try:
@@ -180,7 +182,7 @@ for logins in logindetails:
 
 
 # Create a workbook and add a worksheet.
-workbook = xlsxwriter.Workbook('C:/WebDriver/AmexOffer.xlsx')
+workbook = xlsxwriter.Workbook(amexexcelfile)
 worksheet = workbook.add_worksheet()
 
 row = 0
