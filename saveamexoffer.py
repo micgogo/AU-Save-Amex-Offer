@@ -42,9 +42,9 @@ def nextCard(driver):
 
     #Count how many cards
     try:
-        element = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//*[@class='collapsible-header margin-1-l-sm-down margin-2-l-md-up']")))
+        element = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//*[@class='dls-accent-white-01-bg border-b dls-accent-gray-01-bg account-row']")))
     finally:
-        allcards = driver.find_elements_by_xpath("//*[@class='collapsible-header margin-1-l-sm-down margin-2-l-md-up']")
+        allcards = driver.find_elements_by_xpath("//*[@class='collapsible-header']")
 
     #Click on the next card
     if (position < (len(allcards) - 1)):
